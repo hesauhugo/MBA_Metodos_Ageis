@@ -7,6 +7,8 @@
 
 * RUBIN, Kenneth S. Scrum essencial: um guia prático para o mais popular processo ágil. Rio de Janeiro: Alta Books, 2017. E-book. ISBN 9788550804118.
 
+# Aula 01
+
 ## Definindo métodos ágeis
 
 * <img src="definindo_metodos_ageis_mapa.png"/>
@@ -156,6 +158,8 @@
     b) Capacidade, Agilidade e Perseverança…
     [https://engenhariasoftware.wordpress.com/2015/04/29/capacidade-agilidade-e-perseveranca/]
 
+# Aula 02
+
 ## Programação em par    
 * Deve ser trabalhada em sistemas complexos. 
 * programação em par ou pair-programming.
@@ -301,9 +305,120 @@
 
 * <a href="JavaCodeConventions.pdf" target="_blank">Java Code Conventions</a>
 
+# Aula 03
+
+* Desenvolvimento guiado por teste e stand up meeting. 
+* <a href="https://engenhariasoftware.wordpress.com/2009/05/18/desenvolvendo-a-atividade-de-teste-de-software-%E2%80%93-parte-1/">Testes de software - parte 1</a>
+    * Processo de construção de software: Levantamento de requisitos, modelagem de negócio (análise de sistemas), projeto de software, programação, teste, implantação e manutenção.
+    * A atividade de teste é dividida em teste de caixa preta e teste de caixa branca.
+    * Teste exaustivo: Testar todos os possíveis dados de entrada.
+    * Particionamento em classe de equivalência:
+    , análise do valor limite e o teste funcional.
 
 
+# Aula 3
+
+## Testes de software
+
+<a href = "https://engenhariasoftware.wordpress.com/2009/05/18/desenvolvendo-a-atividade-de-teste-de-software-%E2%80%93-parte-1/">Desenvolvendo a atividade de teste de software</a>
+
+<a href="https://engenhariasoftware.wordpress.com/2008/09/23/um-pouco-de-teste-de-software/">Um pouco de teste de software</a>
+
+<a href = "https://engenhariasoftware.wordpress.com/2008/09/25/mais-um-pouco-de-teste-de-software/">Mais um pouco de teste</a>
+
+## Standup meeting
+* um dia de trabalho de equipe xp começa com o standup meeting (reunião em pé)
+* todos estão em pé, mesmo!!
 
 
+* Formato da reunião
+    * ocorrencia: todos os dias
+    * duração: de 10 a 20 minutos
+    * participantes: todos os membros da equipe
+    * horário: antes de iniciar as atividades do dia de trabalho
+
+* porque todos em pé?
+* isto incentiva que a reunião seja rápida
+* objetivos da reunião
+    * todos membros da equipe comentam o trabalho do dia anterior
+    * atualização da equipe perante ao projeto
+    * apresentar os desafios que enfrentaram, e quais as soluções criadas.
+    * avaliar o trabalho do dia anterior, identificando pontos fracos no processo.
+    * decide o que será feito no dia que se inicia.
+    * priorizar as atividades da equipe ao longo do dia
+        * quais cartões serão tratados naquele dia.
+* todos devem falar pelo menos por alguns minutos.
+
+# Aula 4
+* <a href="https://engenhariasoftware.wordpress.com/2018/08/20/cliente-sempre-presente-em-projeto-de-software/">cliente sempre presente em um projeto de software</a>
+## Refactoring
+* O que fazer com um código que está funcionando, mas um pouco legível?
+* como proceder diante de um código mal escrito, mas que funciona?
+* O ditado popular já disse: em time que está ganhando não se mexe
+* Não mexer em código que já está funcionando é uma regra implícita na maioria dos processos de software
+* Não mexer em um código mal escrito pode acarretar problemas, por exemplo:
+    * qualquer parte do software pode precisar ser visitada no puturo para se fazer manutenções corretivas, preventivas ou adaptativas.
+    * java code convention
+* um código mal formulado cria sérias dificuldades para quem um dia tiver necessidade de modificá-lo ou compreendê-lo
+* quando o código está legível é possível alterá-lo rapidamente.
+* o xp recomenda que os desenvolvedores não fiquem parados diante desta situação
+* se o desenvolvedor tem alguma dúvida em uma parte do código, ele deve procurar compreendê-lo e, em seguida, reescrevê-lo de modo a ficar mais legível
+* ele não está alterando a funcionalidade, dado que o código continua fazendo a mesma coisa
+* ele só está tornando mais legível.
+* toda atividade citada, recebe o nome de refactoring.
+* na verdade o xp vai além:
+    * é obrigação do programador fazer o refactoring de qualquer parte do código que esteja pouco legível
+* a alteração não deve afetar o comportamento que originou do código, ela deve apenas torná-lo mais legível.
+* o conceito de refactoring ainda de mãos dadas com a prática de código coletivo.
+* o refactoring torna simples a prática de código coletivo, pois os desenvolvedores conseguem ler qualquer parte do código facilmente.
+* a prática do código coletivo ajuda a equipe a identificar a prática do refactoring.
+* quando várias pessoas lêem o mesmo co´digo, fica mais fácil identificar práticas mal formuladas.
+* Metáfora:
+    * o software é como nossa casa
+    * a casa é um lugar que vive em constante evolução e mutação
+    * existe uma certa estabilidade, mas de vez em quando acontece uma coisa nova
+    * compramos um aparelho, colocamos um quadro na parede, ou encontramos um belo tapete para o chão.
+    * temos duas abordagens para nossa casa:
+        * organizada ou desorganizada
+    * as pessoas lavam os pratos, retiram o lixo, arrumam a cama e executam outras atividades.
+    * estas atividades tem um pequeno custo diário. entretanto ela gera flexibilidade, agilidade e conforto
+    * suponha que vc queira convidar alguns amigos para jantar em sua casa, se vc for desorganizado, será preciso marcar o jantar com dois meses de anteced~encia.
+    * pois você necessita organizar a bagunça.
+    *  porém se a casa for organizada, você pode convidá-los para jantar no dia seguinte.
+    * a casa fornece agilidade, flexibilidade e conforto.
+    * o mesmo acontece com o software
+    * com algumas ações diárias a equipe pode mantê-lo organizado e legível
+    * isto permite ao cliente que incorpore qualquer necessidade com agilidade.
+* xp e refactoring: uma relação importante, pois o refactoring fornece agilidade para a questão do feedback
+* na comunidade xp persiste um ditado:
+    * um dia sem refactoring é como um dia sem sol
+
+## Codigo coletivo
+
+* projeto implementado por uma equipe:
+    * dividi-lo em partes
+    * cad membro da equipe fique responsável por uma parte
+    * cada pessoa é responsável por um conjunto de código
+* é comum encontrar as ilhas de conhecimento
+    * pessoa que conhece muito uma parte do código
+    * se alguém necessitar mexer no código deve pedir auxilio a ilha de conhecimento
+* problemas
+    * a ilha pode se transformar em um gargalo dentro do projeto caso a parte do código que está sob sua responsabilidade precise ser modificada inúmeras vezes.
+    * a pessoa não consegue atender a demanda.
+    * se a pessoa ficar doente, e não for trabalhar alguns dias?
+    * se alguém necessitar mexer no código, sem a ajuda desta pessoa não conseguirá ou terá grande dificuldade.
+* Naturalmente um pouco de documentação pode ajudar, desde que ela venha sendo atualizada pelo nosso personagem adoentado.
+* com o conceito de ilha de conhecimento e possível saber se o código está legível
+* estes fator levaram o xp a propor a utilização de código coletivo
+* código estará sendo sempre revisado.
+* a programação em par já colabora para evitar a formação de ilhas de conhecimento
+* importante: todos sabem que o código sofrerá visitas durante a execução do projeto, isto leva os desenvolvedores a deixá-lo o código sempre legível.
+* código coletivo demanda coragem por parte dos desenvolvedores. afinal, diversas vezes ao dia o desenvolvedor terá que mexer em partes do sistema que não foram construídas por ele.
+* O código coletivo depende de duas outras práticas
+    * refactoring
+    * programação em pares
+
+
+stand up meeting quando aplicar: [https://engenhariasoftware.wordpress.com/2018/08/21/stand-up-meeting-quando-aplicar/]
 
 

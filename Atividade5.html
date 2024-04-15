@@ -1,0 +1,108 @@
+<html><head><style>body {
+   color: black;
+}
+</style></head><body><ol>
+<li>Iniciamos um processo de transição no curso, falamos até o momento somente de xP, em curto espaço de tempo vamos falar do Scrum. Em alguns momentos vou fazer algumas provocações. Segue a primeira delas:</li>
+</ol>
+<p>O texto apresentado no link abaixo defende que &quot;Refinement é um termo novo na boa e “velha” Engenharia de Software&quot;.  </p>
+<p>[<a href="https://engenhariasoftware.wordpress.com/2021/06/06/refinement-scrum/">https://engenhariasoftware.wordpress.com/2021/06/06/refinement-scrum/</a>]</p>
+<p>Faça a leitura do texto completo (3 minutos) e responda: Você concorda que &quot;Refinement é um termo novo na boa e “velha” Engenharia de Software&quot;?</p>
+<p>Sim ou Não?</p>
+<p>Justifique rapidamente sua resposta.</p>
+<ul>
+<li><p>Resposta</p>
+<ul>
+<li>sim concordo, refinement é um termo novo na boa e velha engenharia de software.</li>
+<li>o texto apresenta um termo utilizado por metodologias ágeis em uma etapa da construção do software, sendo essa a de priorização das atividades</li>
+<li>anteriormente já existia essa etapa de priorizar e componentizar, no entanto as novas filosofias de desenvolvimento ágil trouxeram termos novos para processos antigos.</li>
+</ul>
+</li>
+<li><p>Vamos aplicar o Refactoring e Código Coletivo.</p>
+</li>
+</ul>
+<p>Solicite um amigo o código fonte de um programa. Verifique se o código enviado a você é simples e fácil de entender. Verifique se existem uma padronização na nomenclatura das variáveis, um organização do programa em rotinas, se os parâmetros das rotinas estão coerentes.</p>
+<p>Após analisar me informe rapidamente se o código necessita ou não de Refactoring.</p>
+<ul>
+<li>Resposta<ul>
+<li>a seguir será apresentado o código enviado em c#</li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-csharp">        [<span class="hljs-name">Authorize</span>]
+        [<span class="hljs-name">HttpPost</span>]
+        public async Task&lt;IActionResult&gt; PostContagem(<span class="hljs-name">ContagemDeEstoque</span> contagem, string database)
+        {
+            string strsql = string.Empty<span class="hljs-comment">;</span>
+            string OBS = contagem.Observacao == <span class="hljs-string">""</span> ? <span class="hljs-string">"NULL"</span> : $<span class="hljs-string">"'{contagem.Observacao}'"</span><span class="hljs-comment">;</span>
+            await using (<span class="hljs-name">NpgsqlConnection</span> conn = ExternalConnection.Conn(<span class="hljs-name">database</span>))
+            {
+                conn.Open()<span class="hljs-comment">;</span>
+                strsql += $<span class="hljs-string">" INSERT INTO inventario_barras_cabecalho(data_hora, codpto, obs)"</span><span class="hljs-comment">;</span>
+                strsql += $<span class="hljs-string">" VALUES(NOW(),{contagem.CodigoPonto},{OBS});"</span><span class="hljs-comment">;</span>
+                strsql += $<span class="hljs-string">" SELECT MAX(codigo) AS codigo FROM inventario_barras_cabecalho;"</span><span class="hljs-comment">;</span>
+                NpgsqlCommand command1 = new NpgsqlCommand(<span class="hljs-name">strsql</span>, conn)<span class="hljs-comment">;</span>
+                NpgsqlDataReader dr = command1.ExecuteReader()<span class="hljs-comment">;</span>
+                int codCabecalho = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+                while (<span class="hljs-name">dr.Read</span>())
+                {
+                    codCabecalho = dr.GetInt32(<span class="hljs-name">dr.GetOrdinal</span>(<span class="hljs-string">"codigo"</span>))<span class="hljs-comment">;</span>
+                }
+                dr.Close()<span class="hljs-comment">;</span>
+                strsql = <span class="hljs-string">""</span><span class="hljs-comment">;</span>
+                foreach (<span class="hljs-name">CodigoDeBarraDTO</span> item in contagem.CodigosDeBarra)
+                {
+                    strsql += $<span class="hljs-string">" INSERT INTO inventario_barras_itens(cod_cabecalho, data_hora, cod_barras)"</span><span class="hljs-comment">;</span>
+                    strsql += $<span class="hljs-string">" VALUES({codCabecalho},NOW(),'{item.Descricao}');"</span><span class="hljs-comment">;</span>
+                }
+                NpgsqlCommand comando2 = new NpgsqlCommand(<span class="hljs-name">strsql</span>, conn)<span class="hljs-comment">;</span>
+                comando2.ExecuteNonQuery()<span class="hljs-comment">;</span>
+            }
+            return CreatedAtAction(<span class="hljs-name">nameof</span>(<span class="hljs-name">PostContagem</span>), null)<span class="hljs-comment">;</span>
+        }
+</code></pre>
+<ul>
+<li>Após analisar o código podemos fazer algumas mudanças<ol>
+<li>alterar strsql de string para system.Text.StringBuilder para aumentar a performance</li>
+<li>seguir padrao de nomenclatura de variáveis, ao invés de <code>OBS</code> usar <code>observacoes</code></li>
+<li>usar para validação String.IsNullOrEmpty para ter uma validação mais abrangente</li>
+<li>usar dollar para informar strings ao invés de aspas simples, isso é o mínimo para evitar sql injection</li>
+</ol>
+</li>
+</ul>
+<pre><code class="lang-csharp">    [<span class="hljs-name">Authorize</span>]
+    [<span class="hljs-name">HttpPost</span>]
+    public async Task&lt;IActionResult&gt; PostContagem(<span class="hljs-name">ContagemDeEstoque</span> contagem, string database)
+    {
+        var strsql = new System.Text.StringBuilder()<span class="hljs-comment">;</span>
+        string observacoes = String.IsNullOrEmpty(<span class="hljs-name">contagem.Observacao</span>) ? <span class="hljs-string">"NULL"</span> : $<span class="hljs-string">"$obs${contagem.Observacao}$obs$"</span><span class="hljs-comment">;</span>
+        await using (<span class="hljs-name">NpgsqlConnection</span> conn = ExternalConnection.Conn(<span class="hljs-name">database</span>))
+        {
+            conn.Open()<span class="hljs-comment">;</span>
+            strsql.AppendLine(<span class="hljs-name">$</span><span class="hljs-string">" INSERT INTO inventario_barras_cabecalho(data_hora, codpto, obs)"</span>)<span class="hljs-comment">;</span>
+            strsql.AppendLine(<span class="hljs-name">$</span><span class="hljs-string">" VALUES(NOW(),{contagem.CodigoPonto},{observacoes});"</span>)<span class="hljs-comment">;</span>
+            strsql.AppendLine(<span class="hljs-name">$</span><span class="hljs-string">" SELECT MAX(codigo) AS codigo FROM inventario_barras_cabecalho;"</span>)<span class="hljs-comment">;</span>
+            NpgsqlCommand command1 = new NpgsqlCommand(<span class="hljs-name">strsql.ToString</span>(), conn)<span class="hljs-comment">;</span>
+            NpgsqlDataReader dr = command1.ExecuteReader()<span class="hljs-comment">;</span>
+            int codCabecalho = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+            while (<span class="hljs-name">dr.Read</span>())
+            {
+                codCabecalho = dr.GetInt32(<span class="hljs-name">dr.GetOrdinal</span>(<span class="hljs-string">"codigo"</span>))<span class="hljs-comment">;</span>
+            }
+            dr.Close()<span class="hljs-comment">;</span>
+            strsql = new System.Text.StringBuilder()<span class="hljs-comment">;</span>
+            strsql.AppendLine(<span class="hljs-name">$</span><span class="hljs-string">" INSERT INTO inventario_barras_itens(cod_cabecalho, data_hora, cod_barras) VALUES "</span>)<span class="hljs-comment">;</span>
+            foreach (<span class="hljs-name">CodigoDeBarraDTO</span> item in contagem.CodigosDeBarra)
+            {
+                strsql.AppendLine(<span class="hljs-name">$</span><span class="hljs-string">" ({codCabecalho},NOW(),$desc${item.Descricao}$desc$),"</span>)<span class="hljs-comment">;</span>
+            }
+
+            NpgsqlCommand comando2 = new NpgsqlCommand(<span class="hljs-name">strsql.ToString</span>(), conn)<span class="hljs-comment">;</span>
+            comando2.ExecuteNonQuery()<span class="hljs-comment">;</span>
+        }
+        return CreatedAtAction(<span class="hljs-name">nameof</span>(<span class="hljs-name">PostContagem</span>), null)<span class="hljs-comment">;</span>
+    }
+</code></pre>
+<ul>
+<li>O código poderia ser refatorado em mais vezes ainda quebrando em mais métodos. outra coisa que poderia ser feita é colocar o try catch.</li>
+</ul>
+</body></html>
