@@ -440,5 +440,10 @@ Agile e planejamento Estratégico: [https://engenhariasoftware.wordpress.com/201
 
 # Aula 6
 
-
+* canvas e scrum
+* usado para completar a frase "e se..."
+* Criar backlog canvas
+* pegar as atividades chaves
+* detalhar melhor as atividades chaves no product backlog
+* 
 
