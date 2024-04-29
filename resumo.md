@@ -421,4 +421,24 @@
 
 stand up meeting quando aplicar: [https://engenhariasoftware.wordpress.com/2018/08/21/stand-up-meeting-quando-aplicar/]
 
+# Aula 5
+
+##  Uma visão geral do SCRUM
+
+* <img src="scrum.png"/>
+
+PO: Conjunto de ideias, histórias, relacionadas ao produto.
+PB: itens que devem ser desenvolvidos.
+PM(planning meeting): reunião de planejamento com os times e realizar a priorização
+Sprint Backlog: tempo que será desenvolvido
+Daily Stand Up: fazer reuniões diárias para alinhar o projeto, reunião rápida. Vitórias, dificuldades e dores. 
+Deployment(sprint review + sprint retrospective): Entrega do produto.
+
+### outros recursos
+
+Agile e planejamento Estratégico: [https://engenhariasoftware.wordpress.com/2016/10/04/agile-strategic-planning-tecnica-para-o-desenvolvimento-e-execucao-de-um-planejamento-estrategico-modelo-de-referencia/]
+
+# Aula 6
+
+
 
