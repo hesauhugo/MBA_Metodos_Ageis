@@ -447,3 +447,11 @@ Agile e planejamento Estratégico: [https://engenhariasoftware.wordpress.com/201
 * detalhar melhor as atividades chaves no product backlog
 * 
 
+# Aula 7
+
+* scrum e sprint backlog
+* HQ em requisitos de software artigo
+* artigo Scrum Solo
+* artigo Agile strategic planning
+* artigo prospectando e gerenciando projetos para empresas incubadas
+* 
